@@ -17,11 +17,17 @@ $SPEC{gen_sample_tree} = {
     args => {
         size => {
             summary => 'Which tree to generate',
-            schema => ['str*', in=>['tiny1', 'medium1']],
+            schema => ['str*', in=>['tiny1', 'small1', 'medium1']],
             description => <<'_',
 
-There are several predefined sizes to choose from. `tiny1` is a very tiny
-object, with only depth of 2 and a total of 3 nodes, including root node.
+There are several predefined sizes to choose from.
+
+`tiny1` is a very tiny tree, with only depth of 2 and a total of 3 nodes,
+including root node.
+
+`small1` is a small tree with depth of 4 and a total of 16 nodes, including root
+node.
+
 `medium1` is a tree of depth 7 and ~20k nodes, which is about the size of
 `Org::Document` tree generated when parsing my `todo.org` document circa early
 2016 (~750kB, ~2900 todo items).
@@ -65,6 +71,18 @@ sub gen_sample_tree {
                 {id=>3, level=>1},
             ],
         });
+    } elsif ($size eq 'small1') {
+        require Data::Random::Tree;
+        my $id = 1;
+        return Data::Random::Tree::create_random_tree(
+            num_objects_per_level => [3, 2, 8, 2],
+            classes => [$c], # unused because we use code_instantiate_node
+            code_instantiate_node => sub {
+                my ($cl, $lvl, $parent) = @_;
+                if ($lvl==0) { $cl=$c } elsif ($lvl % 2) { $cl=$c1 } else { $cl=$c2 }
+                $cl->new(id => $id++, level => $lvl);
+            },
+        );
     } elsif ($size eq 'medium1') {
         require Data::Random::Tree;
         my $id = 1;
