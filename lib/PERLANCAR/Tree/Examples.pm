@@ -117,12 +117,7 @@ use base qw(Tree::Example::HashNode);
 
 package # hide from PAUSE
     Tree::Example::ArrayNode;
-use Class::Build::Array::Glob;
-
-has id       => (is=>'rw');
-has level    => (is=>'rw');
-has parent   => (is=>'rw');
-has children => (is=>'rw', glob=>1);
+use Tree::Object::Array::Glob qw(id level);
 
 package # hide from PAUSE
     Tree::Example::ArrayNode::Sub1;
