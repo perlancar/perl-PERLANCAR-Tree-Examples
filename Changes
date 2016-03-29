@@ -1,5 +1,11 @@
 Revision history for PERLANCAR-Tree-Examples
 
+0.03    2016-03-29 (PERLANCAR)
+
+	- Switch from Class::Build::Array::Glob to
+	  Tree::Object::Array::Glob.
+
+
 0.02    2016-03-27 (PERLANCAR)
 
 	- Add size 'small1'.
