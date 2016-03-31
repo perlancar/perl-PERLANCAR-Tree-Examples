@@ -72,24 +72,24 @@ sub gen_sample_tree {
             ],
         });
     } elsif ($size eq 'small1') {
-        require Data::Random::Tree;
+        require Tree::Create::Size;
         my $id = 1;
-        return Data::Random::Tree::create_random_tree(
-            num_objects_per_level => [3, 2, 8, 2],
-            classes => [$c], # unused because we use code_instantiate_node
-            code_instantiate_node => sub {
+        return Tree::Create::Size::create_tree(
+            num_nodes_per_level => [3, 2, 8, 2],
+            class => $c, # unused because we use code_instantiate_node
+            code_create_node => sub {
                 my ($cl, $lvl, $parent) = @_;
                 if ($lvl==0) { $cl=$c } elsif ($lvl % 2) { $cl=$c1 } else { $cl=$c2 }
                 $cl->new(id => $id++, level => $lvl);
             },
         );
     } elsif ($size eq 'medium1') {
-        require Data::Random::Tree;
+        require Tree::Create::Size;
         my $id = 1;
-        return Data::Random::Tree::create_random_tree(
-            num_objects_per_level => [100, 3000, 5000, 8000, 3000, 1000, 300],
-            classes => [$c], # unused because we use code_instantiate_node
-            code_instantiate_node => sub {
+        return Tree::Create::Size::create_tree(
+            num_nodes_per_level => [100, 3000, 5000, 8000, 3000, 1000, 300],
+            class => $c, # unused because we use code_instantiate_node
+            code_create_node => sub {
                 my ($cl, $lvl, $parent) = @_;
                 if ($lvl==0) { $cl=$c } elsif ($lvl % 2) { $cl=$c1 } else { $cl=$c2 }
                 $cl->new(id => $id++, level => $lvl);
