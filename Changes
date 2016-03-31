@@ -1,5 +1,10 @@
 Revision history for PERLANCAR-Tree-Examples
 
+0.04    2016-03-31 (PERLANCAR)
+
+	- Switch from Data::Random::Tree to Tree::Create::Size.
+
+
 0.03    2016-03-29 (PERLANCAR)
 
 	- Switch from Class::Build::Array::Glob to
