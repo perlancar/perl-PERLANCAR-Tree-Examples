@@ -1,5 +1,11 @@
 Revision history for PERLANCAR-Tree-Examples
 
+0.05    2016-04-01 (PERLANCAR)
+
+	- Tweak/modify examples in PERLANCAR::Tree::Examples and
+          PERLANCAR::HTML::Tree::Examples to be more equivalent to each other.
+
+
 0.04    2016-03-31 (PERLANCAR)
 
 	- Switch from Data::Random::Tree to Tree::Create::Size.
