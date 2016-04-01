@@ -1,5 +1,12 @@
 Revision history for PERLANCAR-Tree-Examples
 
+1.000   2016-04-01 (PERLANCAR)
+
+	- No functional changes.
+
+        - Synchronize version number with PERLANCAR::HTML::Tree::Examples.
+
+
 0.05    2016-04-01 (PERLANCAR)
 
 	- Tweak/modify examples in PERLANCAR::Tree::Examples and
