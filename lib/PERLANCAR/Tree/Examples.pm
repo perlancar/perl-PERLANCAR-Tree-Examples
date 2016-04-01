@@ -170,3 +170,9 @@ use base qw(Tree::Example::ArrayNode);
 This distribution can generate sample tree objects of several size (depth +
 number of nodes) and implementation (hash-based nodes or array-based). I use
 these example trees for benchmarking or testing in several other distributions.
+
+
+=head1 SEE ALSO
+
+L<dump-perlancar-sample-tree> (L<App::DumpPERLANCARSampleTree>), a simple CLI to
+conveniently view the sample data.
