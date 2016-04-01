@@ -66,7 +66,7 @@ sub gen_sample_tree {
         $nums_per_level = [2];
         $classes_per_level = [@classes[0..1]];
     } elsif ($size eq 'small1') {
-        $nums_per_level = [3, 2, 8, ];
+        $nums_per_level = [3, 2, 8, 2];
         $classes_per_level = [@classes[0..4]];
     } elsif ($size eq 'medium1') {
         $nums_per_level = [100, 3000, 5000, 8000, 3000, 1000, 300];
