@@ -81,7 +81,10 @@ sub gen_sample_tree {
             my ($parent, $level, $seniority) = @_;
             $id++;
             my $class = $classes_per_level->[$level];
-            return ($class->new(id => $id, level => $level));
+            my $obj = $class->new;
+            $obj->id($id);
+            $obj->level($level);
+            $obj;
         },
         $nums_per_level,
     );
