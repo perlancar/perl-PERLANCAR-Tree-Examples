@@ -171,6 +171,14 @@ This distribution can generate sample tree objects of several size (depth +
 number of nodes) and implementation (hash-based nodes or array-based). I use
 these example trees for benchmarking or testing in several other distributions.
 
+=head2 Overview of available sample data
+
+=over
+
+# CODE: require PERLANCAR::Tree::Examples; require Text::Head; require Tree::Dump; for my $size ('tiny1', 'small1', 'medium1') { for my $backend ('hash', 'array') { print "=item * size=$size, backend=$backend\n\n"; my $s = Text::Head::head_text(text => Tree::Dump::tdmp(PERLANCAR::Tree::Examples::gen_sample_tree(size=>$size, backend=>$backend)), hint=>1, lines=>15); $s =~ s/^/ /gm; print $s, "\n" } }
+
+=back
+
 
 =head1 SEE ALSO
 
