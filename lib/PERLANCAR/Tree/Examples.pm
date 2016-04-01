@@ -7,6 +7,9 @@ use 5.010001;
 use strict;
 use warnings;
 
+use Tree::Create::Callback::ChildrenPerLevel
+    qw(create_tree_using_callback);
+
 use Exporter::Rinci qw(import);
 
 our %SPEC;
@@ -52,52 +55,36 @@ sub gen_sample_tree {
     my $size = $args{size} or die "Please specify size";
     my $backend = $args{backend} // 'hash';
 
-    my ($c, $c1, $c2) = @_;
-    if ($backend eq 'array') {
-        $c  = "Tree::Example::ArrayNode";
-        $c1 = "Tree::Example::ArrayNode::Sub1";
-        $c2 = "Tree::Example::ArrayNode::Sub2";
-    } else {
-        $c  = "Tree::Example::HashNode";
-        $c1 = "Tree::Example::HashNode::Sub1";
-        $c2 = "Tree::Example::HashNode::Sub2";
-    }
+    my @classes;
+    push @classes, "Tree::Example::".ucfirst($backend)."Node";
+    push @classes, "Tree::Example::".ucfirst($backend)."Node::Sub$_"
+        for 1..7;
 
+    my $nums_per_level;
+    my $classes_per_level;
     if ($size eq 'tiny1') {
-        require Tree::FromStruct;
-        return Tree::FromStruct::build_tree_from_struct({
-            _class => $c, id => 1, level => 0, _children => [
-                {id=>2, level=>1},
-                {id=>3, level=>1},
-            ],
-        });
+        $nums_per_level = [2];
+        $classes_per_level = [@classes[0..1]];
     } elsif ($size eq 'small1') {
-        require Tree::Create::Size;
-        my $id = 1;
-        return Tree::Create::Size::create_tree(
-            num_nodes_per_level => [3, 2, 8, 2],
-            class => $c, # unused because we use code_instantiate_node
-            code_create_node => sub {
-                my ($cl, $lvl, $parent) = @_;
-                if ($lvl==0) { $cl=$c } elsif ($lvl % 2) { $cl=$c1 } else { $cl=$c2 }
-                $cl->new(id => $id++, level => $lvl);
-            },
-        );
+        $nums_per_level = [3, 2, 8, ];
+        $classes_per_level = [@classes[0..4]];
     } elsif ($size eq 'medium1') {
-        require Tree::Create::Size;
-        my $id = 1;
-        return Tree::Create::Size::create_tree(
-            num_nodes_per_level => [100, 3000, 5000, 8000, 3000, 1000, 300],
-            class => $c, # unused because we use code_instantiate_node
-            code_create_node => sub {
-                my ($cl, $lvl, $parent) = @_;
-                if ($lvl==0) { $cl=$c } elsif ($lvl % 2) { $cl=$c1 } else { $cl=$c2 }
-                $cl->new(id => $id++, level => $lvl);
-            },
-        );
+        $nums_per_level = [100, 3000, 5000, 8000, 3000, 1000, 300];
+        $classes_per_level = [@classes[0..7]];
     } else {
         die "Unknown size '$size'";
     }
+
+    my $id = 0;
+    create_tree_using_callback(
+        sub {
+            my ($parent, $level, $seniority) = @_;
+            $id++;
+            my $class = $classes_per_level->[$level];
+            return ($class->new(id => $id, level => $level));
+        },
+        $nums_per_level,
+    );
 }
 
 package # hide from PAUSE
@@ -116,6 +103,27 @@ package # hide from PAUSE
 use base qw(Tree::Example::HashNode);
 
 package # hide from PAUSE
+    Tree::Example::HashNode::Sub3;
+use base qw(Tree::Example::HashNode);
+
+package # hide from PAUSE
+    Tree::Example::HashNode::Sub4;
+use base qw(Tree::Example::HashNode);
+
+package # hide from PAUSE
+    Tree::Example::HashNode::Sub5;
+use base qw(Tree::Example::HashNode);
+
+package # hide from PAUSE
+    Tree::Example::HashNode::Sub6;
+use base qw(Tree::Example::HashNode);
+
+package # hide from PAUSE
+    Tree::Example::HashNode::Sub7;
+use base qw(Tree::Example::HashNode);
+
+
+package # hide from PAUSE
     Tree::Example::ArrayNode;
 use Tree::Object::Array::Glob qw(id level);
 
@@ -125,6 +133,26 @@ use base qw(Tree::Example::ArrayNode);
 
 package # hide from PAUSE
     Tree::Example::ArrayNode::Sub2;
+use base qw(Tree::Example::ArrayNode);
+
+package # hide from PAUSE
+    Tree::Example::ArrayNode::Sub3;
+use base qw(Tree::Example::ArrayNode);
+
+package # hide from PAUSE
+    Tree::Example::ArrayNode::Sub4;
+use base qw(Tree::Example::ArrayNode);
+
+package # hide from PAUSE
+    Tree::Example::ArrayNode::Sub5;
+use base qw(Tree::Example::ArrayNode);
+
+package # hide from PAUSE
+    Tree::Example::ArrayNode::Sub6;
+use base qw(Tree::Example::ArrayNode);
+
+package # hide from PAUSE
+    Tree::Example::ArrayNode::Sub7;
 use base qw(Tree::Example::ArrayNode);
 
 1;
