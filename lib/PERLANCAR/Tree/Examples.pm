@@ -14,7 +14,7 @@ use Exporter::Rinci qw(import);
 
 our %SPEC;
 
-$SPEC{gen_sample_tree} = {
+$SPEC{gen_sample_data} = {
     v => 1.1,
     summary => 'Generate sample tree object',
     args => {
@@ -38,10 +38,12 @@ node.
 _
             req => 1,
             pos => 0,
+            tags => ['data-parameter'],
         },
         backend => {
             schema => ['str*', in=>['array', 'hash']],
             default => 'hash',
+            tags => ['data-parameter'],
         },
     },
     result => {
@@ -49,7 +51,7 @@ _
     },
     result_naked => 1,
 };
-sub gen_sample_tree {
+sub gen_sample_data {
     my %args = @_;
 
     my $size = $args{size} or die "Please specify size";
@@ -89,6 +91,9 @@ sub gen_sample_tree {
         $nums_per_level,
     );
 }
+
+# old name, for backward compatibility
+*gen_sample_tree = \&gen_sample_data;
 
 package # hide from PAUSE
     Tree::Example::HashNode;
@@ -160,6 +165,8 @@ use base qw(Tree::Example::ArrayNode);
 
 1;
 # ABSTRACT:
+
+=for Pod::Coverage ^(gen_sample_tree)$
 
 =head1 SYNOPSIS
 
