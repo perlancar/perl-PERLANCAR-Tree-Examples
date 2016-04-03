@@ -1,9 +1,9 @@
 Revision history for PERLANCAR-Tree-Examples
 
-1.000.0032016-04-02 (PERLANCAR)
+1.000.003  2016-04-02 (PERLANCAR)
 
-	- [Bugfix] Set attributes for array-based object must use
-	  accessors, not set via constructor.
+           - [Bugfix] Set attributes for array-based object must use
+             accessors, not set via constructor.
 
 
 1.000.002  2016-04-01 (PERLANCAR)
