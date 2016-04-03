@@ -1,5 +1,12 @@
 Revision history for PERLANCAR-Tree-Examples
 
+1.000.004  2016-04-03 (PERLANCAR)
+
+	   - No data changes.
+
+	   - Follow Examples::Generator spec.
+
+
 1.000.003  2016-04-02 (PERLANCAR)
 
            - [Bugfix] Set attributes for array-based object must use
