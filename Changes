@@ -1,5 +1,12 @@
 Revision history for PERLANCAR-Tree-Examples
 
+1.0.5   2016-04-07 (PERLANCAR)
+
+	- [Removed] Remove old function alias gen_sample_tree because it
+	  was not exported by Exporter::Rinci anyway after all (no
+	  metadata).
+
+
 1.000.004  2016-04-03 (PERLANCAR)
 
 	   - No data changes.

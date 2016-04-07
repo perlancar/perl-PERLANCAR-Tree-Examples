@@ -163,13 +163,11 @@ use base qw(Tree::Example::ArrayNode);
 1;
 # ABSTRACT:
 
-=for Pod::Coverage ^(gen_sample_tree)$
-
 =head1 SYNOPSIS
 
- use PERLANCAR::Tree::Examples qw(gen_sample_tree);
+ use PERLANCAR::Tree::Examples qw(gen_sample_data);
 
- my $tree = gen_sample_tree(size => 'medium1');
+ my $tree = gen_sample_data(size => 'medium1');
 
 
 =head1 DESCRIPTION
@@ -182,7 +180,7 @@ these example trees for benchmarking or testing in several other distributions.
 
 =over
 
-# CODE: require PERLANCAR::Tree::Examples; require Text::Head; require Tree::Dump; for my $size ('tiny1', 'small1', 'medium1') { for my $backend ('hash', 'array') { print "=item * size=$size, backend=$backend\n\n"; my $s = Text::Head::head_text(text => Tree::Dump::tdmp(PERLANCAR::Tree::Examples::gen_sample_tree(size=>$size, backend=>$backend)), hint=>1, lines=>15); $s =~ s/^/ /gm; print $s, "\n" } }
+# CODE: require PERLANCAR::Tree::Examples; require Text::Head; require Tree::Dump; for my $size ('tiny1', 'small1', 'medium1') { for my $backend ('hash', 'array') { print "=item * size=$size, backend=$backend\n\n"; my $s = Text::Head::head_text(text => Tree::Dump::tdmp(PERLANCAR::Tree::Examples::gen_sample_data(size=>$size, backend=>$backend)), hint=>1, lines=>15); $s =~ s/^/ /gm; print $s, "\n" } }
 
 =back
 
