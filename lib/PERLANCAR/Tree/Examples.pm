@@ -92,9 +92,6 @@ sub gen_sample_data {
     );
 }
 
-# old name, for backward compatibility
-*gen_sample_tree = \&gen_sample_data;
-
 package # hide from PAUSE
     Tree::Example::HashNode;
 use parent qw(Tree::Object::Hash);
