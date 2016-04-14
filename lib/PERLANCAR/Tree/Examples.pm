@@ -41,7 +41,7 @@ _
             tags => ['data-parameter'],
         },
         backend => {
-            schema => ['str*', in=>['array', 'hash']],
+            schema => ['str*', in=>['array', 'hash', 'insideout']],
             default => 'hash',
             tags => ['data-parameter'],
         },
@@ -159,6 +159,42 @@ use base qw(Tree::Example::ArrayNode);
 package # hide from PAUSE
     Tree::Example::ArrayNode::Sub7;
 use base qw(Tree::Example::ArrayNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode;
+use parent qw(Tree::Object::InsideOut);
+use Class::InsideOut qw(public);
+
+public id    => my %id;
+public level => my %level;
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub1;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub2;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub3;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub4;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub5;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub6;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub7;
+use base qw(Tree::Example::InsideoutNode);
 
 1;
 # ABSTRACT:
