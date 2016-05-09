@@ -14,7 +14,7 @@ use Exporter::Rinci qw(import);
 
 our %SPEC;
 
-$SPEC{gen_sample_tree} = {
+$SPEC{gen_sample_data} = {
     v => 1.1,
     summary => 'Generate sample tree object',
     args => {
@@ -38,10 +38,12 @@ node.
 _
             req => 1,
             pos => 0,
+            tags => ['data-parameter'],
         },
         backend => {
-            schema => ['str*', in=>['array', 'hash']],
+            schema => ['str*', in=>['array', 'hash', 'insideout']],
             default => 'hash',
+            tags => ['data-parameter'],
         },
     },
     result => {
@@ -49,7 +51,7 @@ _
     },
     result_naked => 1,
 };
-sub gen_sample_tree {
+sub gen_sample_data {
     my %args = @_;
 
     my $size = $args{size} or die "Please specify size";
@@ -158,14 +160,50 @@ package # hide from PAUSE
     Tree::Example::ArrayNode::Sub7;
 use base qw(Tree::Example::ArrayNode);
 
+package # hide from PAUSE
+    Tree::Example::InsideoutNode;
+use parent qw(Tree::Object::InsideOut);
+use Class::InsideOut qw(public);
+
+public id    => my %id;
+public level => my %level;
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub1;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub2;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub3;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub4;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub5;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub6;
+use base qw(Tree::Example::InsideoutNode);
+
+package # hide from PAUSE
+    Tree::Example::InsideoutNode::Sub7;
+use base qw(Tree::Example::InsideoutNode);
+
 1;
 # ABSTRACT:
 
 =head1 SYNOPSIS
 
- use PERLANCAR::Tree::Examples qw(gen_sample_tree);
+ use PERLANCAR::Tree::Examples qw(gen_sample_data);
 
- my $tree = gen_sample_tree(size => 'medium1');
+ my $tree = gen_sample_data(size => 'medium1');
 
 
 =head1 DESCRIPTION
@@ -178,7 +216,7 @@ these example trees for benchmarking or testing in several other distributions.
 
 =over
 
-# CODE: require PERLANCAR::Tree::Examples; require Text::Head; require Tree::Dump; for my $size ('tiny1', 'small1', 'medium1') { for my $backend ('hash', 'array') { print "=item * size=$size, backend=$backend\n\n"; my $s = Text::Head::head_text(text => Tree::Dump::tdmp(PERLANCAR::Tree::Examples::gen_sample_tree(size=>$size, backend=>$backend)), hint=>1, lines=>15); $s =~ s/^/ /gm; print $s, "\n" } }
+# CODE: require PERLANCAR::Tree::Examples; require Text::Head; require Tree::Dump; for my $size ('tiny1', 'small1', 'medium1') { for my $backend ('hash', 'array') { print "=item * size=$size, backend=$backend\n\n"; my $s = Text::Head::head_text(text => Tree::Dump::tdmp(PERLANCAR::Tree::Examples::gen_sample_data(size=>$size, backend=>$backend)), hint=>1, lines=>15); $s =~ s/^/ /gm; print $s, "\n" } }
 
 =back
 
